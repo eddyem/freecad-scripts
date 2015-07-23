@@ -1,0 +1,47 @@
+*****************************
+DESCRIPTION:
+*****************************
+
+Optical module for FreeCAD
+still realized just lens creator
+
+*****************************
+INSTALL:
+*****************************
+
+put this directory with its content into ~/.FreeCAD/Mod/
+
+*****************************
+RUN:
+*****************************
+
+-----------------------------
+To create lens do:
+
+	import Lens; Lens.makeLens(R1=15.0, R2=-15., W=1., H=7., pnt=Base.Vector(0,0,0), A=Base.Vector(1,0,0))
+
+where
+	Radii's signs are as in optics rules: "+" when center is to the right 
+	R1 - first raduis (left side)
+	R2 - second radius (right side)
+	d - lens width at optics axe
+	H - lens height (full diameter)
+	pnt = lens center
+	A - optics axe direction
+
+-----------------------------
+To create several lenses at one optical axis do:
+
+	import Lens; def makeLensBench(LDescr, pnt0=Base.Vector(0,0,0), A=Base.Vector(1,0,0)):
+	
+where
+	LDescr - array of [R1, R2, W, H, D] for each lens
+	D is ditance between subsequent surfaces
+	
+for example, make seven lenses & a lens glued from three lenses:
+	
+	import Lens
+	a=[[8,6,1,6,3], [10,-15,2.5,8,5], [-16,10,0.5,6,7], [-8,-6,0.5,4,3], [3,3,0.2,2,1], [0,0,0.1,1,0.1], [0,3,.3,1]]
+	Lens.makeLensBench(a)
+	b=[[-10,8,0.1,6], [8,16,0.5,6], [16,-9,1,6]]
+	Lens.makeLensBench(b,App.Vector(0,10,0))

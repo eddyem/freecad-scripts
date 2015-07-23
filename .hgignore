@@ -1,0 +1,7 @@
+syntax: glob
+.git*
+*~
+*.o
+*.bak
+*.bck
+.dropbox.attr
